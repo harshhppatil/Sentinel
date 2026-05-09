@@ -1,17 +1,58 @@
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-# https://maven.apache.org/tools/wrapper/#Usage_with_or_without_Binary_JAR
-.mvn/wrapper/maven-wrapper.jar
+# ── Node.js ──────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
 
-# Eclipse m2e generated files
-# Eclipse Core
-.project
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
+# ── Environment Variables ─────────────────────────────────────────
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ── React / Vite Build ────────────────────────────────────────────
+client/dist/
+client/.vite/
+
+# ── Spring Boot / Maven ───────────────────────────────────────────
+server/architect-service/target/
+server/architect-service/.mvn/
+*.class
+*.jar
+*.war
+*.ear
+
+# ── Maven Wrapper (optional — commit if you want others to build without Maven installed) ──
+# server/architect-service/mvnw
+# server/architect-service/mvnw.cmd
+
+# ── Logs ──────────────────────────────────────────────────────────
+*.log
+logs/
+server/api-service/src/logstreamer/logs/*.log
+
+# ── IDE ───────────────────────────────────────────────────────────
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── OS ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Docker ────────────────────────────────────────────────────────
+.docker/
+
+# ── Misc ──────────────────────────────────────────────────────────
+*.tmp
+*.temp
+.cache/
