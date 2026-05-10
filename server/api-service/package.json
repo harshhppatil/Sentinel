@@ -1,24 +1,19 @@
 {
-  "name": "auth-service",
+  "name": "api-service",
   "version": "1.0.0",
-  "type":"module",
-  "description": "",
+  "type": "module",
+  "description": "Sentinel API Service — Kernel Vault, System Pulse, Log Streamer",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node seed.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.0",
   "dependencies": {
-    "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
-    "express-validator": "^7.3.2",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1",
