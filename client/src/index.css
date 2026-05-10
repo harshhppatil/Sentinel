@@ -1,0 +1,300 @@
+@import "tailwindcss";
+
+/* ========================================
+  THE SENTINEL THEME (Based on Raycast)
+  ========================================
+*/
+@theme {
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
+
+  /* Surface Ladder (No drop shadows, only color depth) */
+  --color-canvas: #07080a;
+  --color-surface: #0d0d0d;
+  --color-surface-elevated: #101111;
+  --color-surface-card: #121212;
+
+  /* Borders (Hairline System) */
+  --color-hairline: #242728;
+  --color-hairline-soft: rgba(255, 255, 255, 0.08);
+  --color-hairline-strong: rgba(255, 255, 255, 0.16);
+
+  /* Typography Colors */
+  --color-ink: #f4f4f6;
+  --color-body: #cdcdcd;
+  --color-charcoal: #d3d3d4;
+  --color-mute: #9c9c9d;
+  --color-ash: #6a6b6c;
+  --color-stone: #434345;
+  --color-on-dark: #ffffff;
+  --color-on-dark-mute: rgba(255, 255, 255, 0.72);
+
+  /* Brand / Interactive Colors */
+  --color-primary: #ffffff;
+  --color-primary-pressed: #e8e8e8;
+  --color-on-primary: #000000;
+
+  /* Accents (Reserved for icons/badges) */
+  --color-accent-blue: #57c1ff;
+  --color-accent-blue-soft: rgba(87, 193, 255, 0.15);
+  --color-accent-red: #ff6161;
+  --color-accent-red-soft: rgba(255, 97, 97, 0.15);
+  --color-accent-green: #59d499;
+  --color-accent-green-soft: rgba(89, 212, 153, 0.15);
+  --color-accent-yellow: #ffc533;
+  --color-accent-yellow-soft: rgba(255, 197, 51, 0.15);
+
+  /* Hero stripe gradient */
+  --color-hero-start: #ff5757;
+  --color-hero-end: #a1131a;
+
+  /* Border Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.4s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+  --animate-slide-in-right: slide-in-right 0.3s ease-out;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-scan-line: scan-line 3s linear infinite;
+  --animate-skeleton: skeleton 1.5s ease-in-out infinite;
+  --animate-number-pop: number-pop 0.3s ease-out;
+  --animate-expand: expand 0.3s ease-out;
+}
+
+/* ========================================
+  KEYFRAMES
+  ========================================
+*/
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px currentColor; }
+  50%      { opacity: 0.5; box-shadow: 0 0 12px currentColor; }
+}
+
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes skeleton {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.15; }
+}
+
+@keyframes number-pop {
+  0%  { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100%{ transform: scale(1); }
+}
+
+@keyframes expand {
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 500px; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ========================================
+  GLOBAL OVERRIDES
+  ========================================
+*/
+@layer base {
+  :root {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "calt", "kern", "liga", "ss03";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-hairline-strong);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ash);
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(87, 193, 255, 0.25);
+    color: var(--color-on-dark);
+  }
+}
+
+/* ========================================
+  COMPONENT CLASSES
+  ========================================
+*/
+@layer components {
+  /* Cards */
+  .sentinel-card {
+    @apply bg-surface border border-hairline rounded-lg text-on-dark;
+  }
+
+  .sentinel-card-elevated {
+    @apply bg-surface-elevated border border-hairline rounded-lg text-on-dark;
+  }
+
+  .sentinel-card-interactive {
+    @apply bg-surface border border-hairline rounded-lg text-on-dark transition-colors duration-150 hover:bg-surface-elevated hover:border-hairline-strong cursor-pointer;
+  }
+
+  /* Inputs */
+  .sentinel-input {
+    @apply bg-surface-elevated border border-hairline rounded-md text-on-dark px-3 py-2 outline-none focus:border-hairline-strong transition-colors duration-150 text-sm;
+  }
+
+  .sentinel-select {
+    @apply bg-surface-elevated border border-hairline rounded-md text-on-dark px-3 py-2 outline-none focus:border-hairline-strong transition-colors duration-150 text-sm appearance-none cursor-pointer;
+  }
+
+  .sentinel-search {
+    @apply bg-surface-elevated border border-hairline rounded-md text-on-dark px-4 py-2.5 outline-none focus:border-hairline-strong transition-colors duration-150 text-sm w-full h-11;
+  }
+
+  /* Buttons */
+  .sentinel-btn-primary {
+    @apply bg-primary text-on-primary px-4 py-2 h-9 rounded-md font-medium text-sm tracking-wide hover:bg-primary-pressed transition-colors duration-150 flex items-center justify-center gap-2 cursor-pointer;
+  }
+
+  .sentinel-btn-secondary {
+    @apply bg-transparent text-on-dark px-4 py-2 h-9 rounded-md font-medium text-sm tracking-wide hover:bg-surface-elevated transition-colors duration-150 flex items-center justify-center gap-2 cursor-pointer;
+  }
+
+  .sentinel-btn-tertiary {
+    @apply bg-surface-elevated text-on-dark px-4 py-2 h-9 rounded-md font-medium text-sm tracking-wide border border-hairline hover:border-hairline-strong transition-colors duration-150 flex items-center justify-center gap-2 cursor-pointer;
+  }
+
+  .sentinel-btn-danger {
+    @apply bg-accent-red-soft text-accent-red px-4 py-2 h-9 rounded-md font-medium text-sm tracking-wide hover:bg-accent-red/20 transition-colors duration-150 flex items-center justify-center gap-2 cursor-pointer;
+  }
+
+  /* Pills / Chips */
+  .sentinel-pill {
+    @apply px-2.5 py-1 rounded-full text-xs font-medium transition-colors duration-150 cursor-pointer;
+  }
+
+  .sentinel-pill-inactive {
+    @apply bg-transparent text-body hover:text-on-dark hover:bg-surface-elevated;
+  }
+
+  .sentinel-pill-active {
+    @apply bg-surface-elevated text-on-dark;
+  }
+
+  /* Badges */
+  .sentinel-badge {
+    @apply px-2 py-0.5 rounded-xs text-xs font-medium tracking-wide;
+  }
+
+  /* Terminal / Code */
+  .sentinel-terminal {
+    @apply bg-surface border border-hairline rounded-lg font-mono text-sm overflow-hidden;
+  }
+
+  .sentinel-code-block {
+    @apply bg-surface-card border border-hairline rounded-md font-mono text-sm p-4 overflow-x-auto whitespace-pre;
+  }
+
+  /* Keycap */
+  .sentinel-keycap {
+    @apply inline-flex items-center justify-center px-1.5 py-0.5 rounded-xs text-xs text-body bg-surface-card border border-hairline-strong font-mono min-w-5 h-5;
+  }
+
+  /* Metric cards */
+  .sentinel-metric {
+    @apply bg-surface border border-hairline rounded-lg p-5 flex flex-col gap-2;
+  }
+
+  /* Modal overlay */
+  .sentinel-overlay {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+  }
+
+  .sentinel-modal {
+    @apply bg-surface border border-hairline rounded-xl w-full max-w-lg max-h-[85vh] overflow-y-auto;
+  }
+
+  /* Status dot */
+  .sentinel-dot {
+    @apply w-1.5 h-1.5 rounded-full flex-shrink-0;
+  }
+
+  /* Log levels */
+  .log-error { color: var(--color-accent-red); }
+  .log-warn  { color: var(--color-accent-yellow); }
+  .log-info  { color: var(--color-accent-blue); }
+  .log-debug { color: var(--color-mute); }
+
+  .log-bg-error { background: var(--color-accent-red-soft); }
+  .log-bg-warn  { background: var(--color-accent-yellow-soft); }
+  .log-bg-info  { background: var(--color-accent-blue-soft); }
+
+  /* Skeleton loader */
+  .sentinel-skeleton {
+    @apply bg-surface-elevated rounded-md animate-skeleton;
+  }
+
+  /* Hero stripe */
+  .hero-stripe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-hero-start), var(--color-hero-end), var(--color-hero-start));
+    background-size: 200% 100%;
+    animation: hero-stripe-move 4s linear infinite;
+    z-index: 100;
+  }
+
+  @keyframes hero-stripe-move {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  /* Progress bar */
+  .sentinel-progress {
+    @apply h-1.5 rounded-full bg-surface-elevated overflow-hidden;
+  }
+  .sentinel-progress-bar {
+    @apply h-full rounded-full transition-all duration-700 ease-out;
+  }
+}
