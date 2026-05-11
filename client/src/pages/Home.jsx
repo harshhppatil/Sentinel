@@ -36,37 +36,47 @@ export default function Home() {
   const { user } = useAuth()
 
   return (
-    <div className="min-h-screen bg-canvas text-body font-sans pt-14">
+    <div className="min-h-screen bg-canvas text-body font-sans relative overflow-hidden">
+
+      {/* The Premium Blueprint Grid Background */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-[0.15]"
+        style={{ 
+          backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', 
+          backgroundSize: '24px 24px' 
+        }} 
+      />
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        {/* Diagonal stripe gradient */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-1/2 -left-1/4 w-[150%] h-[200%] opacity-[0.07]"
-            style={{ background: 'repeating-linear-gradient(135deg, #ff5757 0px, #a1131a 2px, transparent 2px, transparent 40px)' }} />
-        </div>
-
-        <div className="relative max-w-[1240px] mx-auto px-6 md:px-12 pt-20 pb-24 md:pt-28 md:pb-32">
+      <section className="relative pt-24 pb-20 md:pt-32 md:pb-32">
+        <div className="relative max-w-[1240px] mx-auto px-6 md:px-12 z-10">
           <div className="max-w-[800px] animate-slide-up">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-2 h-2 rounded-full bg-accent-green animate-glow-pulse" style={{ color: '#59d499' }} />
-              <span className="text-mute text-xs uppercase tracking-widest font-medium">All systems operational</span>
+            
+            {/* Live Radar Pulse */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-green opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-green shadow-[0_0_8px_rgba(89,212,153,0.8)]"></span>
+              </div>
+              <span className="text-mute text-[11px] uppercase tracking-[0.2em] font-medium">All systems operational</span>
             </div>
-            <h1 className="text-ink text-[40px] sm:text-[48px] md:text-[64px] font-semibold leading-[1.1] tracking-tight mb-6"
-              style={{ fontFeatureSettings: '"calt", "kern", "liga", "ss03"' }}>
+
+            <h1 className="text-transparent bg-clip-text bg-gradient-to-b from-ink to-stone text-[48px] md:text-[72px] font-bold leading-[1.05] tracking-tighter mb-6">
               DevOps Command Center.
             </h1>
-            <p className="text-body text-base md:text-lg leading-[1.6] max-w-[600px] mb-8">
+            <p className="text-body text-base md:text-lg leading-[1.6] max-w-[600px] mb-10">
               Distributed orchestration and site reliability monitoring. Powered by a polyglot microservices architecture
               running <span className="text-on-dark font-medium">Node.js</span>, <span className="text-on-dark font-medium">Spring Boot</span>,
               and <span className="text-on-dark font-medium">MongoDB</span>.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link to={user ? '/architect' : '/register'} className="sentinel-btn-primary">
-                {user ? '⚡ Launch Architect' : '⚡ Get Started'}
+            <div className="flex flex-wrap items-center gap-4">
+              <Link to={user ? '/architect' : '/register'} className="bg-on-dark text-canvas hover:bg-white px-6 py-3 rounded-md font-medium text-[14px] transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                {user ? 'Launch Architect' : 'Initialize System'}
               </Link>
-              <div className="sentinel-btn-tertiary">
-                Press <span className="sentinel-keycap mx-1">⌘</span><span className="sentinel-keycap">K</span>
+              <div className="flex items-center gap-2 text-mute text-sm px-4 py-3 rounded-md border border-hairline bg-surface/50 backdrop-blur-sm">
+                <span>Press</span>
+                <span className="bg-surface-card border border-hairline-strong rounded px-1.5 py-0.5 text-xs font-mono text-on-dark">⌘</span>
+                <span className="bg-surface-card border border-hairline-strong rounded px-1.5 py-0.5 text-xs font-mono text-on-dark">K</span>
               </div>
             </div>
           </div>
@@ -74,24 +84,24 @@ export default function Home() {
       </section>
 
       {/* Architecture Pillars */}
-      <section className="max-w-[1240px] mx-auto px-6 md:px-12 pb-24">
-        <h2 className="text-ink text-xl md:text-2xl font-medium mb-2 animate-fade-in">The Three Pillars</h2>
+      <section className="relative max-w-[1240px] mx-auto px-6 md:px-12 pb-24 z-10">
+        <h2 className="text-ink text-xl md:text-2xl font-medium mb-2 tracking-tight">The Three Pillars</h2>
         <p className="text-mute text-sm mb-8">Observability · Automation · Knowledge</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-fade-in">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {PILLARS.map(pillar => (
-            <div key={pillar.name} className="sentinel-card p-6 flex flex-col gap-4">
+            <div key={pillar.name} className="bg-surface/40 backdrop-blur-md border border-hairline rounded-xl p-6 flex flex-col gap-4 hover:border-hairline-strong transition-colors">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-xl" style={{ background: pillar.color + '18' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-xl shadow-inner" style={{ background: pillar.color + '15', border: `1px solid ${pillar.color}30` }}>
                   {pillar.icon}
                 </div>
                 <div>
                   <h3 className="text-on-dark font-medium text-base">{pillar.name}</h3>
-                  <p className="text-mute text-xs">{pillar.desc}</p>
+                  <p className="text-mute text-xs mt-0.5">{pillar.desc}</p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-1.5 mt-auto">
+              <div className="flex flex-wrap gap-2 mt-auto pt-4">
                 {pillar.modules.map(m => (
-                  <span key={m} className="text-xs text-body bg-surface-elevated px-2 py-0.5 rounded-full">{m}</span>
+                  <span key={m} className="text-[11px] text-body bg-surface-card border border-hairline px-2.5 py-1 rounded-full">{m}</span>
                 ))}
               </div>
             </div>
@@ -100,33 +110,42 @@ export default function Home() {
       </section>
 
       {/* Module Grid */}
-      <section className="max-w-[1240px] mx-auto px-6 md:px-12 pb-24">
-        <h2 className="text-ink text-xl md:text-2xl font-medium mb-6 animate-fade-in">Active Modules</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="relative max-w-[1240px] mx-auto px-6 md:px-12 pb-24 z-10">
+        <h2 className="text-ink text-xl md:text-2xl font-medium mb-6 tracking-tight">Active Modules</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {MODULES.map((mod, i) => (
             <Link key={mod.to} to={mod.to}
-              className="group sentinel-card-interactive p-6 flex flex-col gap-4 animate-fade-in"
-              style={{ animationDelay: `${i * 80}ms` }}>
-              <div className="flex justify-between items-start">
-                <div className="w-12 h-12 bg-surface-card rounded-md flex items-center justify-center border border-hairline text-xl group-hover:scale-105 transition-transform">
+              className="group relative bg-surface border border-hairline rounded-xl p-6 transition-all duration-500 hover:-translate-y-1 flex flex-col gap-4 overflow-hidden">
+              
+              {/* Dynamic Reactor Glow Effects */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                   style={{ background: `radial-gradient(600px circle at 50% 0%, ${mod.tagColor}10, transparent 40%)` }} />
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border"
+                   style={{ borderColor: `${mod.tagColor}40`, boxShadow: `0 8px 30px ${mod.tagColor}15` }} />
+
+              <div className="flex justify-between items-start relative z-10">
+                <div className="w-12 h-12 bg-surface-card rounded-md flex items-center justify-center border border-hairline text-xl shadow-sm group-hover:scale-105 transition-transform duration-300">
                   {mod.icon}
                 </div>
-                <span className="sentinel-badge" style={{ background: mod.tagColor + '22', color: mod.tagColor }}>
+                <span className="text-[11px] font-medium px-2 py-1 rounded-full border" 
+                      style={{ background: mod.tagColor + '10', color: mod.tagColor, borderColor: mod.tagColor + '30' }}>
                   {mod.tag}
                 </span>
               </div>
-              <div>
-                <h3 className="text-on-dark text-lg font-medium mb-1">{mod.label}</h3>
-                <p className="text-body text-sm leading-relaxed">{mod.desc}</p>
+              
+              <div className="relative z-10">
+                <h3 className="text-on-dark text-lg font-medium mb-1.5 group-hover:text-white transition-colors">{mod.label}</h3>
+                <p className="text-mute text-[13px] leading-relaxed">{mod.desc}</p>
               </div>
+
               {mod.preview ? (
-                <div className="mt-auto pt-4 border-t border-hairline flex justify-between text-xs">
-                  <span className="text-mute">CPU: <span style={{ color: mod.preview.color }}>14%</span></span>
+                <div className="mt-auto pt-4 border-t border-hairline flex justify-between text-xs relative z-10 font-mono">
+                  <span className="text-mute">CPU: <span style={{ color: mod.preview.color }} className="animate-pulse">14%</span></span>
                   <span className="text-mute">RAM: <span className="text-on-dark">2.1GB</span></span>
                 </div>
               ) : (
-                <div className="mt-auto pt-4 text-xs text-mute flex items-center gap-1 group-hover:text-on-dark transition-colors">
-                  Open module →
+                <div className="mt-auto pt-4 text-xs font-medium flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity relative z-10" style={{ color: mod.tagColor }}>
+                  Open module &rarr;
                 </div>
               )}
             </Link>
@@ -135,10 +154,10 @@ export default function Home() {
       </section>
 
       {/* Tech Stack */}
-      <section className="max-w-[1240px] mx-auto px-6 md:px-12 pb-24">
-        <div className="sentinel-card p-6 md:p-8">
-          <h2 className="text-ink text-lg font-medium mb-6">Technology Stack</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="relative max-w-[1240px] mx-auto px-6 md:px-12 pb-24 z-10">
+        <div className="bg-surface/30 border border-hairline rounded-xl p-8 backdrop-blur-sm">
+          <h2 className="text-ink text-lg font-medium mb-8 tracking-tight">Core Infrastructure</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6">
             {[
               { name: 'React 19', desc: 'Frontend UI', icon: '⚛️' },
               { name: 'Node.js', desc: 'API + Auth Services', icon: '🟢' },
@@ -147,15 +166,15 @@ export default function Home() {
               { name: 'Docker', desc: 'Containerization', icon: '🐳' },
               { name: 'JWT', desc: 'Authentication', icon: '🔑' },
               { name: 'SSE', desc: 'Real-time Streaming', icon: '📡' },
-              { name: 'Tailwind', desc: 'Design System', icon: '🎨' },
+              { name: 'Tailwind 4', desc: 'Design System', icon: '🎨' },
             ].map(tech => (
-              <div key={tech.name} className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-surface-elevated rounded-md flex items-center justify-center text-base flex-shrink-0">
+              <div key={tech.name} className="flex items-center gap-3 group">
+                <div className="w-10 h-10 bg-surface-card border border-hairline rounded-lg flex items-center justify-center text-lg flex-shrink-0 group-hover:border-hairline-strong transition-colors">
                   {tech.icon}
                 </div>
                 <div>
-                  <span className="text-sm text-on-dark font-medium block">{tech.name}</span>
-                  <span className="text-xs text-mute">{tech.desc}</span>
+                  <span className="text-[13px] text-on-dark font-medium block">{tech.name}</span>
+                  <span className="text-[11px] text-mute">{tech.desc}</span>
                 </div>
               </div>
             ))}
@@ -163,16 +182,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-hairline">
-        <div className="max-w-[1240px] mx-auto px-6 md:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-5 h-5 rounded bg-gradient-to-br from-[#ff5757] to-[#a1131a] flex items-center justify-center">
-              <span className="text-white text-[9px] font-bold">S</span>
-            </div>
-            <span className="text-mute text-sm">Sentinel — Advanced Web Technologies (1CS403) · RNGPIT</span>
+      {/* Cleaned Professional Footer */}
+      <footer className="border-t border-hairline relative z-10 bg-canvas/80 backdrop-blur-md">
+        <div className="max-w-[1240px] mx-auto px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="text-on-dark text-sm font-semibold tracking-tighter">Sentinel<span className="text-accent-red">.</span></span>
+            <span className="text-mute text-sm">— Distributed Orchestration Engine</span>
           </div>
-          <span className="text-stone text-xs">v1.0.0-alpha · Built with MERN + Spring Boot</span>
+          <span className="text-stone text-[11px] font-mono tracking-wider uppercase">v1.0.0-alpha · MERN + Spring Boot</span>
         </div>
       </footer>
     </div>

@@ -170,7 +170,7 @@ export default function KubeCloud() {
             <div className="w-8 h-8 bg-surface-card rounded-md flex items-center justify-center border border-hairline"><span className="text-lg">☸️</span></div>
             <h1 className="text-ink text-2xl md:text-3xl font-semibold tracking-tight">Kube-Cloud</h1>
           </div>
-          <p className="text-mute text-sm ml-11">Client-side YAML validator for Kubernetes manifests — pure React, no backend</p>
+          <p className="text-mute text-sm ml-11">YAML validator for Kubernetes manifests</p>
         </div>
 
         {/* Templates */}
