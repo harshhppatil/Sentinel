@@ -19,7 +19,6 @@ client/.vite/
 
 # ── Spring Boot / Maven ───────────────────────────────────────────
 server/architect-service/target/
-server/architect-service/.mvn/
 *.class
 *.jar
 *.war
